@@ -1,38 +1,99 @@
-/*!
- * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
 
-// jQuery to collapse the navbar on scroll
-function collapseNavbar() {
-    if ($(".navbar").offset().top > 50) {
-        $(".navbar-fixed-top").addClass("top-nav-collapse");
-    } else {
-        $(".navbar-fixed-top").removeClass("top-nav-collapse");
-    }
+
+with(Math)π=PI
+with(b.style)margin=0,overflow="hidden",backgroundColor='#000'
+a.style.width="100vw"
+a.style.height="100vh"
+g=this
+W=a.width=innerWidth
+H=a.height=innerHeight
+m=null
+T=[]
+overlay.onclick=function(){
+	overlay.style.display='none'
+}
+g.onresize=setSize=function(){
+	oldH=H
+	W=a.width=innerWidth
+	H=a.height=innerHeight
 }
 
-$(window).scroll(collapseNavbar);
-$(document).ready(collapseNavbar);
+function color(i,j){
+	return "hsl("+(((((i|0)*36+j*8)|0))%360)+",100%,50%)"
+}
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
+function getTouch(id,i){
+	for(i=T.length;i--;)
+		if(T[i].id==id)return i
+	return -1
+}
 
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-  if ($(this).attr('class') != 'dropdown-toggle active' && $(this).attr('class') != 'dropdown-toggle') {
-    $('.navbar-toggle:visible').click();
-  }
-});
+begin=function(o){
+	c.beginPath()
+	c.arc(o.x,o.y,25,0,2*π,false)
+	c.fillStyle=color(o.id, o.n)
+	c.fill()
+}
+
+move=function(o,x,y){
+	c.lineWidth=50
+	c.lineCap="round"
+	c.beginPath()
+	c.moveTo(o.x,o.y)
+	o.x=x
+	o.y=y
+	c.lineTo(o.x,o.y)
+	c.strokeStyle=color(o.id,++o.n)
+	c.stroke()
+}
 
 
+ontouchstart=function(e,t,o){
+	for(t=e.changedTouches,i=t.length;i--;){
+		o={id:t[i].identifier,x:t[i].clientX,y:t[i].clientY,n:i*10}
+		begin(o)
+		T.push(o)
+	}
+}
+
+ontouchmove=function(e,t,i,j,o){
+	for(t=e.changedTouches,i=t.length;i--;){
+		j=getTouch(t[i].identifier)
+		if(j>-1){
+			o=T[j]
+			move(o,t[i].clientX,t[i].clientY)
+		}
+	}
+}
+
+ontouchend=function(e,t,i,j){
+	for(t=e.changedTouches,i=t.length;i--;){
+		j=getTouch(t[i].identifier)
+		if(j>-1){
+			T.splice(j,1)
+		}
+	}
+}
+
+onmousedown=function(e,o){
+	m={id:"mouse",x:e.clientX,y:e.clientY,n:88}
+}
+
+onmousemove=function(e,o,j){
+	if(!m)return
+	move(m,e.clientX,e.clientY)
+}
+
+onmouseup=function(){
+	m=null
+}
+
+// fading out. If you don't like it, feel free to 
+// fork and comment it out :)
+~function L(t) {
+	c.fillStyle="rgba(0,0,0,.1)"
+	c.fillRect(0,0,W,H)
+	t/=1e3
+	requestAnimationFrame(L)
+}(0)
 

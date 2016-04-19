@@ -31,3 +31,20 @@ body{
   
 }
 
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+#overlay {
+	margin:0;
+	position:absolute;
+	width: 100vw;
+	height: 100vh;
+	background: #000;
+}
+p {
+	font-family: 'Pacifico', cursive;
+	font-size: 10vh;
+	color: #fff;
+	text-align: center;
+	background: none;
+}
+
