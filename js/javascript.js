@@ -1,137 +1,75 @@
-
-
-with(Math)π=PI
-with(b.style)margin=0,overflow="hidden",backgroundColor='#000'
-a.style.width="100vw"
-a.style.height="100vh"
-g=this
-W=a.width=innerWidth
-H=a.height=innerHeight
-m=null
-T=[]
-overlay.onclick=function(){
-	overlay.style.display='none'
-}
-g.onresize=setSize=function(){
-	oldH=H
-	W=a.width=innerWidth
-	H=a.height=innerHeight
-}
-
-function color(i,j){
-	return "hsl("+(((((i|0)*36+j*8)|0))%360)+",100%,50%)"
-}
-
-function getTouch(id,i){
-	for(i=T.length;i--;)
-		if(T[i].id==id)return i
-	return -1
-}
-
-begin=function(o){
-	c.beginPath()
-	c.arc(o.x,o.y,25,0,2*π,false)
-	c.fillStyle=color(o.id, o.n)
-	c.fill()
-}
-
-move=function(o,x,y){
-	c.lineWidth=50
-	c.lineCap="round"
-	c.beginPath()
-	c.moveTo(o.x,o.y)
-	o.x=x
-	o.y=y
-	c.lineTo(o.x,o.y)
-	c.strokeStyle=color(o.id,++o.n)
-	c.stroke()
-}
-
-
-ontouchstart=function(e,t,o){
-	for(t=e.changedTouches,i=t.length;i--;){
-		o={id:t[i].identifier,x:t[i].clientX,y:t[i].clientY,n:i*10}
-		begin(o)
-		T.push(o)
-	}
-}
-
-ontouchmove=function(e,t,i,j,o){
-	for(t=e.changedTouches,i=t.length;i--;){
-		j=getTouch(t[i].identifier)
-		if(j>-1){
-			o=T[j]
-			move(o,t[i].clientX,t[i].clientY)
-		}
-	}
-}
-
-ontouchend=function(e,t,i,j){
-	for(t=e.changedTouches,i=t.length;i--;){
-		j=getTouch(t[i].identifier)
-		if(j>-1){
-			T.splice(j,1)
-		}
-	}
-}
-
-onmousedown=function(e,o){
-	m={id:"mouse",x:e.clientX,y:e.clientY,n:88}
-}
-
-onmousemove=function(e,o,j){
-	if(!m)return
-	move(m,e.clientX,e.clientY)
-}
-
-onmouseup=function(){
-	m=null
-}
-
-// fading out. If you don't like it, feel free to 
-// fork and comment it out :)
-~function L(t) {
-	c.fillStyle="rgba(0,0,0,.1)"
-	c.fillRect(0,0,W,H)
-	t/=1e3
-	requestAnimationFrame(L)
-}(0)
-var coord = $('#coord')
-
-var m =document.getElementById("demo");
+/** NOTE: uses jQuery for quick & easy DOM manipulation **/
 
 function getLocation(){
-  if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-    
-  } else {
-    m.innerHTML = "Browser does not support Geolocation.";
-     }
-}
-function showPosition(position) {
-  var latlon = position.coords.latitude + "," + position.coords.longitude;
-  var map_img ="http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=500x500&sensor=false";
-  document.getElementById("mapholder").innerHTML = "<img src= '"+map_img+"'>";
-}
-function showError(error){
-  switch(error.code) {
-     case error.PERMISSION_DENIED:          m.innerHTML = "Denied request for Geolocation.";
-     break;
-       
-    case error.POSITION_UNAAVAILABLE:
-    m.innerHTML ="Location information unavailable.";
-    break;
-      
-    case error.TIMEOUT:
-    m.innerHTML ="Location timeout.";
-    
-    case error.UNKNOWN_ERROR:
-    m.innerHTML = "An unknown error occurred.";
-    break;
-     
-  }
-  
-}
+  var msg; 
 
+  /** 
+  first, test for feature support
+  **/
+  if('geolocation' in navigator){
+    // geolocation is supported :)
+    requestLocation();
+  }else{
+    // no geolocation :(
+    msg = "Sorry, looks like your browser doesn't support geolocation";
+    outputResult(msg); // output error message
+    $('.pure-button').removeClass('pure-button-primary').addClass('pure-button-success'); // change button style
+  }
+
+  /*** 
+  requestLocation() returns a message, either the users coordinates, or an error message
+  **/
+  function requestLocation(){
+    /**
+    getCurrentPosition() below accepts 3 arguments:
+    a success callback (required), an error callback  (optional), and a set of options (optional)
+    **/
+  
+    var options = {
+      // enableHighAccuracy = should the device take extra time or power to return a really accurate result, or should it give you the quick (but less accurate) answer?
+      enableHighAccuracy: false,
+      // timeout = how long does the device have, in milliseconds to return a result?
+      timeout: 5000,
+      // maximumAge = maximum age for a possible previously-cached position. 0 = must return the current position, not a prior cached position
+      maximumAge: 0
+    };
+  
+    // call getCurrentPosition()
+    navigator.geolocation.getCurrentPosition(success, error, options); 
+  
+    // upon success, do this
+    function success(pos){
+      // get longitude and latitude from the position object passed in
+      var lng = pos.coords.longitude;
+      var lat = pos.coords.latitude;
+      // and presto, we have the device's location!
+      msg = 'You appear to be at longitude: ' + lng + ' and latitude: ' + lat  + '<img src="http://maps.googleapis.com/maps/api/staticmap?zoom=15&size=300x300&maptype=roadmap&markers=color:red%7Clabel:A%7C' + lat + ',' + lng+ '&sensor=false">';
+      outputResult(msg); // output message
+      $('.pure-button').removeClass('pure-button-primary').addClass('pure-button-success'); // change button style
+    }
+  
+    // upon error, do this
+    function error(err){
+      // return the error message
+      msg = 'Error: ' + err + ' :(';
+      outputResult(msg); // output button
+      $('.pure-button').removeClass('pure-button-primary').addClass('pure-button-error'); // change button style
+    }  
+  } // end requestLocation();
+
+  /*** 
+  outputResult() inserts msg into the DOM  
+  **/
+  function outputResult(msg){
+    $('.result').addClass('result').html(msg);
+  }
+} // end getLocation()
+
+// attach getLocation() to button click
+$('.pure-button').on('click', function(){
+  // show spinner while getlocation() does its thing
+  $('.result').html('<i class="fa fa-spinner fa-spin"></i>');
+  getLocation();
+});
 
 
