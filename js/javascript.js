@@ -96,4 +96,42 @@ onmouseup=function(){
 	t/=1e3
 	requestAnimationFrame(L)
 }(0)
+var coord = $('#coord')
+
+var m =document.getElementById("demo");
+
+function getLocation(){
+  if (navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+    
+  } else {
+    m.innerHTML = "Browser does not support Geolocation.";
+     }
+}
+function showPosition(position) {
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
+  var map_img ="http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=500x500&sensor=false";
+  document.getElementById("mapholder").innerHTML = "<img src= '"+map_img+"'>";
+}
+function showError(error){
+  switch(error.code) {
+     case error.PERMISSION_DENIED:          m.innerHTML = "Denied request for Geolocation.";
+     break;
+       
+    case error.POSITION_UNAAVAILABLE:
+    m.innerHTML ="Location information unavailable.";
+    break;
+      
+    case error.TIMEOUT:
+    m.innerHTML ="Location timeout.";
+    
+    case error.UNKNOWN_ERROR:
+    m.innerHTML = "An unknown error occurred.";
+    break;
+     
+  }
+  
+}
+
+
 
