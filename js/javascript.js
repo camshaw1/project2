@@ -73,3 +73,31 @@ $('.pure-button').on('click', function(){
 });
 
 
+var horizontalLine = document.getElementById("horizontal");
+var verticalLine = document.getElementById("vertical");
+var dot = document.getElementById("dot");
+var outercircle = document.getElementById("outercircle");
+var indicator = document.getElementById("indicator");
+
+var track = function(e) {
+  horizontalLine.y1.baseVal.value = e.clientY;
+  horizontalLine.y2.baseVal.value = e.clientY;
+  verticalLine.x1.baseVal.value = e.clientX;
+  verticalLine.x2.baseVal.value = e.clientX;
+
+  dot.cx.baseVal.value = e.clientX;
+  dot.cy.baseVal.value = e.clientY;
+  
+  outercircle.cx.baseVal.value = e.clientX;
+  outercircle.cy.baseVal.value = e.clientY;
+  
+  indicator.innerHTML = "x: " + e.clientX + " | y: " + e.clientY;
+  //console.log(e.clientX,e.clientY);
+}
+
+window.addEventListener("mousemove", track);
+window.addEventListener("touchmove", track);
+//document.onmousemove = track();
+
+//document.addEventListener("touchstart", function(e) {
+//}

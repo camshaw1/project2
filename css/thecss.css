@@ -31,15 +31,65 @@ button{
 }
 .result img{
   margin-top: 1em;
-  border: 1px solid #333; 
+  border: 1px solid #ffffff; 
 }
 .fa-spinner{
   font-size: 3em;
 }
 span{font-size:.7em;color: #ffffff;}
+
 @keyframes bounce {
 	/* thx to https://github.com/daneden/animate.css */
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
 	40% {transform: translateY(-15px);}
 	60% {transform: translateY(-7px);}
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: "Segoe UI", "Open Sans";
+  font-size: 20pt;
+}
+
+#header {
+  position: relative;
+  text-align: center;
+  top: 10px;
+}
+
+#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#horizontal {
+  stroke: red;
+}
+
+#vertical {
+  stroke: blue;
+}
+
+#dot {
+  stroke: #000;
+  fill: none;
+}
+
+#outercircle {
+  stroke: #A0A;
+  fill: none;
+}
+
+#indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.75em;
+  padding: 2px 10px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #AAA;
+  border-radius: 5px;
 }
