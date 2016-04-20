@@ -3,10 +3,10 @@
 @import url(http://yui.yahooapis.com/pure/0.3.0/pure-min.css);
 
 html{
-  background: #222;
+  background: #555;
 }
 body{
-  background: #fff;
+  background: #555;
   font-family: 'Open Sans', sans-serif;
   max-width: 380px;
   border: 1px solid #ccc;
@@ -21,7 +21,7 @@ body{
   font-size: 10em;
   color: #cf483e;
   text-shadow: 0 0 1px #000; 
-  animation: bounce 1s linear 3;
+  animation: bounce 1s linear 5;
 }
 button{
   box-shadow: 0 0 1px #000; 
