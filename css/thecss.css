@@ -55,6 +55,21 @@ span{font-size:.7em;color: #ffffff;}
   top: 10px;
 }
 
+.header {
+  font-size: 40px;
+}
+
+.chrome .header {
+  color: red;
+}
+
+.safari .header {
+  color: blue;
+}
+
+.firefox .header {
+  color: orange;
+}
 #container {
   position: absolute;
   top: 0;
