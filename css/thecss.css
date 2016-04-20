@@ -45,12 +45,7 @@ span{font-size:.7em;color: #ffffff;}
 	60% {transform: translateY(-7px);}
 }
 
-body {
-  margin: 0;
-  width: 100%;
-  font-family: "Segoe UI", "Open Sans";
-  font-size: 20pt;
-}
+
 
 #header {
   position: relative;
