@@ -25,7 +25,6 @@ body{
 }
 button{
   box-shadow: 0 0 1px #000; 
-  position: absolute;
 }
 .result{
   margin: 2em 2em 1em 2em;
@@ -55,7 +54,7 @@ span{font-size:.7em;color: #ffffff;}
 }
 
 #container {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
 }
