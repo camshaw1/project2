@@ -42,6 +42,13 @@ color: #ffffff;
 	
 }
 
+.caption2 {
+	font-size: 18px;
+	color: #ffffff;
+	font-weight: 200;
+	
+	
+}
 .fa-map-marker{
   width:100%;
   height: 100%;
@@ -89,17 +96,7 @@ span{font-size:.7em;color: #ffffff;}
 	 font-weight: 200;
 }
 
-.chrome .header {
-  color: red;
-}
 
-.safari .header {
-  color: blue;
-}
-
-.firefox .header {
-  color: orange;
-}
 #container {
   position: absolute;
   top: 0;
