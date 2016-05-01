@@ -7,7 +7,8 @@ html{
 }
 body{
   background: #555;
-  font-family: "Denk One", sans-serif;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
   max-width: 700px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -65,7 +66,8 @@ span{font-size:.7em;color: #ffffff;}
 
 .header {
   font-size: 40px;
-     font-family: "Denk One", sans-serif;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
 }
 
 .chrome .header {
@@ -117,7 +119,8 @@ span{font-size:.7em;color: #ffffff;}
 
 
 .info {
-  font-family: courier;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
   font-size: 18px;
   color: #999;
   float: left;
@@ -125,7 +128,8 @@ span{font-size:.7em;color: #ffffff;}
 }
 
 .info-big {
-  font-family: courier;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
   font-size: 32px;
   font-weight: bold;
   color: #999;
@@ -134,14 +138,16 @@ span{font-size:.7em;color: #ffffff;}
 }
 
 .fp { 
-  font-family: courier;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
   font-size: 18px;
   color: #069;
   float: left;
 }
 
 #fingerprint { 
-  font-family: courier;
+     font-family: 'Lato', sans-serif;
+	 font-weight: 200;
   font-size: 32px;
   font-weight: bold;
   color: #069;
