@@ -8,8 +8,8 @@ html{
 body{
   background: #555;
   font-family: 'Open Sans', sans-serif;
-  max-width: 680px;
-  border: 1px solid #ccc;
+  max-width: 800px;
+  border: 2px solid #555;
   border-radius: 5px;
   box-shadow: 0 0 1px #000; 
   margin: 1em auto;
