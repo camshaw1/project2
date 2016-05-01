@@ -3,10 +3,10 @@
 @import url(http://yui.yahooapis.com/pure/0.3.0/pure-min.css);
 
 html{
-  background: #0F302F;
+  background: #050812;
 }
 body{
-  background: #14403D;
+  background: #050812;
      font-family: 'Lato', sans-serif;
 	 font-weight: 200;
   max-width: 700px;
@@ -132,7 +132,7 @@ span{font-size:.7em;color: #ffffff;}
 .info-big {
      font-family: 'Lato', sans-serif;
 	 font-weight: 200;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   color: #ffffff;
   float: left;
