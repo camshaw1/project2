@@ -729,49 +729,6 @@ function fingerprint_language() {
   }
 }
 
-function fingerprint_silverlight() {
-  "use strict";
-  var strOnError, objControl, objPlugin, strSilverlightVersion, strOut;
-
-  strOnError = "Error";
-  objControl = null;
-  objPlugin = null;
-  strSilverlightVersion = null;
-  strOut = null;
-
-  try {
-    try {
-      objControl = new ActiveXObject('AgControl.AgControl');
-      if (objControl.IsVersionSupported("5.0")) {
-        strSilverlightVersion = "5.x";
-      } else if (objControl.IsVersionSupported("4.0")) {
-        strSilverlightVersion = "4.x";
-      } else if (objControl.IsVersionSupported("3.0")) {
-        strSilverlightVersion = "3.x";
-      } else if (objControl.IsVersionSupported("2.0")) {
-        strSilverlightVersion = "2.x";
-      } else {
-        strSilverlightVersion = "1.x";
-      }
-      objControl = null;
-    } catch (e) {
-      objPlugin = navigator.plugins["Silverlight Plug-In"];
-      if (objPlugin) {
-        if (objPlugin.description === "1.0.30226.2") {
-          strSilverlightVersion = "2.x";
-        } else {
-          strSilverlightVersion = parseInt(objPlugin.description[0], 10);
-        }
-      } else {
-        strSilverlightVersion = "N/A";
-      }
-    }
-    strOut = strSilverlightVersion;
-    return strOut;
-  } catch (err) {
-    return strOnError;
-  }
-}
 
 function fingerprint_os() {
   "use strict";
@@ -1383,7 +1340,7 @@ document.getElementById('fonts').innerHTML = fingerprint_fonts();
 document.getElementById('formfields').innerHTML = fingerprint_formfields();
 document.getElementById('java').innerHTML = fingerprint_java();
 document.getElementById('language').innerHTML = fingerprint_language();
-document.getElementById('silverlight').innerHTML = fingerprint_silverlight();
+//document.getElementById('silverlight').innerHTML = fingerprint_silverlight();//
 document.getElementById('os').innerHTML = fingerprint_os();
 document.getElementById('timezone').innerHTML = fingerprint_timezone();
 document.getElementById('touch').innerHTML = fingerprint_touch();
