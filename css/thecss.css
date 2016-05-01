@@ -65,7 +65,7 @@ span{font-size:.7em;color: #ffffff;}
 }
 
 .header {
-  font-size: 40px;
+  font-size: 50px;
      font-family: 'Lato', sans-serif;
 	 font-weight: 200;
 }
@@ -123,7 +123,7 @@ span{font-size:.7em;color: #ffffff;}
 	 font-weight: 200;
   font-size: 18px;
   color: #999;
-  float: left;
+  float: initial;
   padding-right: 10px;
 }
 
